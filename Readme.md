@@ -1,3 +1,10 @@
+# AI-Powered Document Understanding and Search
+
+This project leverages a suite of powerful Python libraries to build an AI-driven system for processing documents, extracting information, and enabling intelligent search capabilities.
+
+## Core Components and Their Roles:
+
+Here's a breakdown of the key libraries used and their specific applications within this project:
 1️⃣ pdfplumber
 
 Purpose: Extracts structured content (text, tables, and metadata) from PDF files.
