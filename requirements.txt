@@ -1,0 +1,5 @@
+pdfplumber
+pillow
+sentence-transformers
+faiss-cpu
+flask
