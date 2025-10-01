@@ -1,84 +1,125 @@
-# AI-Powered Document Understanding and Search
+# AI-Powered Document Search with Gemini Integration
 
-This project leverages a suite of powerful Python libraries to build an AI-driven system for processing documents, extracting information, and enabling intelligent search capabilities.
+A powerful document processing and search system that extracts educational content from PDFs, creates searchable indexes, and provides AI-powered answers using Google's Gemini model.
 
-## Core Components and Their Roles:
+## Features
 
-Here's a breakdown of the key libraries used and their specific applications within this project:
-1️⃣ pdfplumber
+- **Smart PDF Processing**: Extracts text and educational diagrams from PDFs
+- **semantic Search**: Finds relevant content using vector embeddings
+- **AI-Powered Answers**: Generates human-like responses using Google's Gemini
+- **Image Extraction**: Identifies and extracts educational diagrams and figures
+- **Interactive Web UI**: User-friendly interface built with Streamlit
 
-Purpose: Extracts structured content (text, tables, and metadata) from PDF files.
+## Technical Stack
 
-Use in your project:
+- **PDF Processing**: `pdfplumber`, `Pillow`
+- **NLP & Embeddings**: `sentence-transformers`
+- **Vector Search**: `faiss-cpu`
+- **Web Interface**: `streamlit`
+- **AI Model**: Google Gemini API
 
-If your project involves processing PDFs (like invoices, reports, or scanned documents), pdfplumber lets you read text, extract tables, and even locate text positions.
+## Getting Started
 
-Example: Parsing vendor data PDFs to convert into structured tables for AI processing.
+### Prerequisites
+- Python 3.8+
+- pip (Python package manager)
+- Google Gemini API key (for AI features)
 
-2️⃣ Pillow
+### Installation
 
-Purpose: Python Imaging Library (PIL) fork for image processing.
+1. Clone the repository:
+   ```bash
+   git clone <repository-url>
+   cd Img_Chat/Neet
+   ```
 
-Use in your project:
+2. Create and activate a virtual environment:
+   ```bash
+   python -m venv venv
+   .\venv\Scripts\activate  # Windows
+   source venv/bin/activate  # macOS/Linux
+   ```
 
-Handles images inside PDFs or standalone images.
+3. Install dependencies:
+   ```bash
+   pip install -r requirements.txt
+   ```
 
-Resize, crop, convert formats, annotate, or preprocess images before feeding into a model.
+4. Create a `.env` file and add your Gemini API key:
+   ```env
+   GEMINI_API_KEY=your_api_key_here
+   ```
 
-Example: Preprocessing scanned PDFs or product images for AI analysis.
+## Running the Application
 
-3️⃣ sentence-transformers
+1. Start the Streamlit app:
+   ```bash
+   streamlit run streamlit_app.py
+   ```
 
-Purpose: Embedding generation for sentences, paragraphs, or documents using pretrained transformer models.
+2. Open your browser to `http://localhost:8501`
 
-Use in your project:
+3. Use the sidebar to:
+   - Upload a PDF document
+   - Process the document (first-time processing may take a few minutes)
+   - Enter your Gemini API key for AI features
 
-Convert textual data into vector representations for semantic search, similarity matching, or recommendation.
+4. Search for information and get instant answers!
 
-Example:
+## How It Works
 
-Matching user queries to vendor descriptions.
+### 1. Document Processing Pipeline
+- Extracts text and processes PDF pages
+- Identifies and saves educational diagrams and figures
+- Chunks text into manageable segments with overlap
+- Creates vector embeddings for semantic search
 
-Finding similar documents or FAQs from your database.
+### 2. Search & Retrieval
+- Converts queries into vector embeddings
+- Uses FAISS for efficient similarity search
+- Ranks results by relevance
+- Retrieves context from multiple document sections
 
-4️⃣ faiss-cpu
+### 3. AI Enhancement
+- Uses Google's Gemini model to generate human-like answers
+- Provides context-aware responses
+- Explains complex concepts using document content
 
-(I assume you mean FAISS CPU version)
+## Project Structure
 
-Purpose: Efficient similarity search and clustering of high-dimensional vectors.
+```
+Neet/
+├── .env                    # Environment variables
+├── README.md               # This file
+├── requirements.txt        # Python dependencies
+├── streamlit_app.py        # Main Streamlit application
+├── ingest_pdf.py          # PDF processing and search functionality
+├── gemini_helper.py       # Google Gemini integration
+└── output/                # Processed data and extracted images
+    └── images/            # Extracted educational diagrams
+```
 
-Use in your project:
+## AI Integration
 
-Works with embeddings from sentence-transformers.
+This project uses Google's Gemini model for enhanced question answering. To enable AI features:
 
-Enables fast vector search to find the most relevant results.
+1. Get a Gemini API key from [Google AI Studio](https://makersuite.google.com/)
+2. Add it to your `.env` file
+3. Enter it in the sidebar of the web interface
 
-Example:
+## Notes
 
-User searches “best CRM vendor,” FAISS finds the top 5 matching vendors from your embeddings.
+- First-time PDF processing may take several minutes depending on document size
+- Works best with well-structured educational PDFs
+- Optimized for documents with clear section headings and figure captions
 
-5️⃣ Flask
+## License
 
-Purpose: Lightweight Python web framework for building APIs or web apps.
+This project is licensed under the MIT License.
 
-Use in your project:
+## Acknowledgments
 
-Wrap your AI logic (PDF processing, embeddings, vector search) into REST APIs.
-
-Example:
-
-User uploads PDF → Flask API extracts text → generates embeddings → searches FAISS → returns top vendor matches.
-
-✅ Workflow Example Combining All:
-
-User uploads a PDF via a Flask web app.
-
-pdfplumber extracts text and tables.
-
-Pillow processes any images in the PDF.
-
-sentence-transformers generates embeddings of extracted text.
-
-faiss-cpu finds similar vendors or matches in your database.
-
-Flask returns results to the user interface.
+- [Streamlit](https://streamlit.io/) for the web interface
+- [FAISS](https://github.com/facebookresearch/faiss) for efficient similarity search
+- [Sentence Transformers](https://www.sbert.net/) for text embeddings
+- [Google Gemini](https://ai.google.dev/) for AI-powered question answering
